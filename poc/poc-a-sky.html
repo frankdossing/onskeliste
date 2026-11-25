@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WishiCloud – POC A (Sky)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --blue:#4397FF; --ink:#172232; --muted:#6B7280; --bg:#ECF4FF; --line:#D9EAFF; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); background: var(--bg);
+    font-family: Geist, Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .hero {
+    position: relative; overflow: hidden; color: #fff; text-align: center;
+    background: linear-gradient(180deg, #2D65AA 0%, #4397FF 55%, #9CCBFF 100%);
+    padding: 28px 20px 150px;
+  }
+  .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: 0 auto; }
+  .logo { font-weight: 700; font-size: 20px; letter-spacing: -.02em; }
+  .share {
+    font: inherit; font-weight: 600; font-size: 14px; color: #fff; cursor: pointer;
+    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.5);
+    border-radius: 999px; padding: 9px 16px;
+  }
+  .hero h1 { font-size: clamp(38px, 6vw, 66px); letter-spacing: -.035em; line-height: 1.05; margin: 56px 0 12px; }
+  .hero p { margin: 0 auto; max-width: 520px; font-size: 18px; opacity: .95; }
+  .clouds { position: absolute; left: 0; bottom: -1px; width: 100%; height: 110px; }
+  main { max-width: 1080px; margin: -70px auto 0; padding: 0 20px 40px; position: relative; }
+  .cat { margin-bottom: 36px; }
+  .cat h2 { font-size: 22px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+  .pill { font-size: 13px; font-weight: 600; color: var(--blue); background: #fff; border-radius: 999px; padding: 4px 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .card {
+    background: #fff; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;
+    box-shadow: 0 1px 2px rgba(23,34,50,.06), 0 10px 28px rgba(67,151,255,.14);
+    transition: transform .2s;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .media {
+    height: 170px; display: grid; place-items: center; font-size: 56px;
+    background: linear-gradient(135deg, #D9EAFF, #ECF4FF);
+  }
+  .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .body h3 { font-size: 17px; font-weight: 600; margin: 0; line-height: 1.3; }
+  .body p { margin: 0; font-size: 14px; color: var(--muted); }
+  .buy {
+    margin-top: auto; align-self: flex-start; text-decoration: none; color: #fff; font-weight: 600; font-size: 14px;
+    background: var(--blue); border-radius: 999px; padding: 10px 16px;
+  }
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 20px 20px 48px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="nav">
+    <div class="logo">☁️ WishiCloud</div>
+    <button class="share">Del ønskelisten ↗</button>
+  </div>
+  <h1>Min ønskeliste</h1>
+  <p>Ønsker gemmes, ikke glemmes. Del linket med familien, og find gaverne i butikkerne med det samme.</p>
+  <svg class="clouds" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#ECF4FF" d="M0,70 C120,20 240,20 360,60 C480,10 600,10 720,50 C840,10 960,20 1080,55 C1200,20 1320,30 1440,70 L1440,110 L0,110 Z"/>
+  </svg>
+</header>
+
+<main id="sections"></main>
+
+<footer>WishiCloud · Lavet med ❤️ til jul og fødselsdage</footer>
+
+<script>
+  const SECTIONS = [
+    { title: "Mad- & drikkeoplevelser", icon: "🍷", items: [
+      { n: "Madlavningskursus", d: "Gerne fransk mad (fx saucer eller fiskeretter)", i: "🧑‍🍳" },
+      { n: "Tør spansk rød-/hvidvin eller tysk Spätburgunder", d: "Spørg i vinhandlen", i: "🍷" },
+      { n: "Irsk whiskey", d: "Redbreast eller Yellow Spot", i: "🥃" }
+    ]},
+    { title: "Diverse", icon: "🧦", items: [
+      { n: "Kompressionsstrømper", d: "Til løb", i: "🧦" },
+      { n: "Toilettaske", d: "", i: "🧴" },
+      { n: "Weekendtaske", d: "", i: "🧳" },
+      { n: "Meyers hverdagsgrøntsager", d: "Bog", i: "📚" }
+    ]}
+  ];
+
+  document.getElementById("sections").innerHTML = SECTIONS.map(s => `
+    <section class="cat">
+      <h2>${s.icon} ${s.title} <span class="pill">${s.items.length} ønsker</span></h2>
+      <div class="grid">
+        ${s.items.map(it => `
+          <article class="card">
+            <div class="media">${it.i}</div>
+            <div class="body">
+              <h3>${it.n}</h3>
+              ${it.d ? `<p>${it.d}</p>` : ""}
+              <a class="buy" href="#">Se i butik</a>
+            </div>
+          </article>`).join("")}
+      </div>
+    </section>`).join("");
+</script>
+</body>
+</html>

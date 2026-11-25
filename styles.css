@@ -1,0 +1,88 @@
+:root { --blue:#4397FF; --ink:#172232; --muted:#6B7280; --bg:#ECF4FF; --line:#D9EAFF; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--ink); background: var(--bg);
+  font-family: Geist, Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition: transform .8s ease;
+}
+body.flipped { transform: rotate(180deg); }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; overflow: hidden; color: #fff; text-align: center;
+  background: linear-gradient(180deg, #2D65AA 0%, #4397FF 55%, #9CCBFF 100%);
+  padding: 28px 20px 150px;
+}
+.nav { display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: 0 auto; }
+.logo { font-weight: 700; font-size: 20px; letter-spacing: -.02em; }
+.share, .reserve, .buy, .close {
+  font: inherit; cursor: pointer; border-radius: 999px;
+}
+.share {
+  font-weight: 600; font-size: 14px; color: #fff;
+  background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.5); padding: 9px 16px;
+}
+.hero h1 { font-size: clamp(38px, 6vw, 66px); letter-spacing: -.035em; line-height: 1.05; margin: 56px 0 12px; }
+.hero p { margin: 0 auto; max-width: 520px; font-size: 18px; opacity: .95; }
+.clouds { position: absolute; left: 0; bottom: -1px; width: 100%; height: 110px; }
+
+/* ===== Sections & cards ===== */
+main { max-width: 1080px; margin: -70px auto 0; padding: 0 20px 40px; position: relative; }
+.cat { margin-bottom: 36px; }
+.cat h2 { font-size: 22px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.pill { font-size: 13px; font-weight: 600; color: var(--blue); background: #fff; border-radius: 999px; padding: 4px 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+.card {
+  background: #fff; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 1px 2px rgba(23,34,50,.06), 0 10px 28px rgba(67,151,255,.14);
+  transition: transform .2s;
+}
+.card:hover { transform: translateY(-3px); }
+.media {
+  position: relative; overflow: hidden; height: 170px; display: grid; place-items: center; font-size: 56px;
+  background: linear-gradient(135deg, #D9EAFF, #ECF4FF);
+}
+.media img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
+.body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.body h3 { font-size: 17px; font-weight: 600; margin: 0; line-height: 1.3; }
+.body p { margin: 0; font-size: 14px; color: var(--muted); }
+.body .price { color: var(--ink); font-weight: 600; }
+.actions { margin-top: auto; padding-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.reserve, .buy { padding: 10px 14px; font-weight: 600; font-size: 14px; border: 0; }
+.buy { color: #fff; background: var(--blue); }
+.reserve { color: var(--blue); background: #ECF4FF; }
+.card.reserved .reserve { background: #D9F5E6; color: #0A7A4A; }
+footer { text-align: center; color: var(--muted); font-size: 14px; padding: 20px 20px 48px; }
+
+/* ===== Surprise effects ===== */
+#fx { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 40; }
+.sheep, .santa {
+  position: absolute; left: -90px; white-space: nowrap;
+}
+.sheep { font-size: 44px; bottom: 28%; animation: run 3.6s linear forwards; }
+.santa { font-size: 64px; top: 18%; animation: fly 3s ease-in forwards; }
+.santa span { font-size: 16px; background: #fff; color: var(--ink); border-radius: 12px; padding: 4px 10px; position: absolute; top: -18px; left: 70px; white-space: nowrap; }
+@keyframes run { to { transform: translateX(calc(100vw + 180px)); } }
+@keyframes fly { to { transform: translate(calc(100vw + 180px), -35vh); } }
+
+.storm { position: absolute; inset: 0; pointer-events: none; }
+.storm .cl { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-size: 52px; }
+.storm .drop { position: absolute; top: 60px; font-size: 18px; animation: fall .8s linear infinite; }
+@keyframes fall { from { transform: translateY(0); opacity: 1; } to { transform: translateY(120px); opacity: 0; } }
+
+#toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 160%); z-index: 60;
+  background: var(--ink); color: #fff; padding: 14px 18px; border-radius: 14px; max-width: 90vw;
+  box-shadow: 0 12px 30px rgba(23,34,50,.3); transition: transform .4s ease, opacity .4s ease;
+  opacity: 0; pointer-events: none;
+}
+#toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+/* ===== Shop dialog (fallback when pop-ups are blocked) ===== */
+dialog { border: 0; border-radius: 18px; padding: 22px 24px; width: min(420px, 90vw); color: var(--ink); }
+dialog::backdrop { background: rgba(23,34,50,.4); }
+dialog h3 { margin: 0 0 6px; font-size: 18px; }
+dialog .hint { font-size: 14px; color: var(--muted); margin: 0 0 12px; }
+dialog ul { list-style: none; padding: 0; margin: 0 0 16px; }
+dialog li a { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--blue); font-weight: 600; text-decoration: none; }
+dialog .close { background: var(--ink); color: #fff; border: 0; padding: 9px 16px; font-weight: 600; }
