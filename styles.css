@@ -29,8 +29,8 @@ body.flipped { transform: rotate(180deg); }
 /* ===== Sections & cards ===== */
 main { max-width: 1080px; margin: -70px auto 0; padding: 0 20px 40px; position: relative; }
 .cat { margin-bottom: 36px; }
-.cat h2 { font-size: 22px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
-.pill { font-size: 13px; font-weight: 600; color: var(--blue); background: #fff; border-radius: 999px; padding: 4px 10px; }
+.cat h2 { font-size: 22px; letter-spacing: -.02em; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 16px; }
+.pill { font-size: 13px; font-weight: 600; color: var(--blue); background: #fff; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
 .card {
   background: #fff; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;
